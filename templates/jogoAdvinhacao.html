@@ -1,136 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo de Adivinhação</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jogo de Adivinhação</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #f8f9fa; /* Cor de fundo geral */
+            }
 
-    <style>
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f8f9fa; /* Cor de fundo geral */
-        }
+            .container {
+                text-align: center;
+                background-color: #ffffff; /* Cor de fundo do container */
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            }
 
-        .container {
-            text-align: center;
-            background-color: #ffffff; /* Cor de fundo do container */
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-        }
+            form {
+                margin-top: 20px;
+            }
 
-        form {
-            margin-top: 20px;
-        }
+            label {
+                display: block;
+                margin-bottom: 10px;
+                font-size: 18px;
+                color: #007bff; /* Cor azul */
+            }
 
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 18px;
-            color: #007bff; /* Cor azul */
-        }
+            input {
+                width: 20%; /* Reduzi a largura para 60% do container */
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }
 
-        input {
-            width: 20%; /* Reduzi a largura para 60% do container */
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
+            h5 {
+                margin-top: 20px;
+                padding: 10px;
+                border-radius: 5px;
+                color: #28a745; /* Cor verde para sucesso */
+            }
 
-        h5 {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            color: #28a745; /* Cor verde para sucesso */
-        }
+            .btn-container {
+                margin-top: 20px;
+            }
 
-        .btn-container {
-            margin-top: 20px;
-        }
+            button {
+                margin-right: 10px;
+                padding: 10px 20px;
+                border-radius: 20px;
+                background-color: #007bff; /* Cor azul */
+                color: #fff; /* Cor do texto branco */
+                border: none;
+                cursor: pointer;
+            }
 
-        button {
-            margin-right: 10px;
-            padding: 10px 20px;
-            border-radius: 20px;
-            background-color: #007bff; /* Cor azul */
-            color: #fff; /* Cor do texto branco */
-            border: none;
-            cursor: pointer;
-        }
+            button:hover {
+                background-color: #0056b3; /* Cor azul mais escura ao passar o mouse */
+            }
 
-        button:hover {
-            background-color: #0056b3; /* Cor azul mais escura ao passar o mouse */
-        }
+            .btn-restart {
+                padding: 10px 20px;
+                border-radius: 20px;
+                background-color: #dc3545; /* Cor vermelha */
+                color: #fff; /* Cor do texto branco */
+                border: none;
+                cursor: pointer;
+            }
 
-        .btn-restart {
-            padding: 10px 20px;
-            border-radius: 20px;
-            background-color: #dc3545; /* Cor vermelha */
-            color: #fff; /* Cor do texto branco */
-            border: none;
-            cursor: pointer;
-        }
+            .btn-restart:hover {
+                background-color: #c82333; /* Cor vermelha mais escura ao passar o mouse */
+            }
+        </style>
+    </head>
+    <body>
+        {% if numero_secreto==0 %}
+        <form action="/tentar-advinhar-numero" method="POST" class="container">
+            <label for="tentativa">Faça a sua tentativa e descubra o número secreto:</label>
+            <input type="number" id="tentativa" name="tentativa" value="{{tentativa}}" placeholder="Insira um número inteiro" required>
+            <input type="hidden" id="id_jogado_atual" name="id_jogado_atual" value="{{id_jogador_atual}}">
+            <h5>{{resultado}}</h5>
+            <div class="btn-container">
+                <button type="submit">Descobrir</button>
+                <button type="button" class="btn btn-restart" onclick="voltarAoInicio()">Sair</button>
 
-        .btn-restart:hover {
-            background-color: #c82333; /* Cor vermelha mais escura ao passar o mouse */
-        }
-    </style>
-</head>
-<body>
+            </div>
+        </form>
 
-{% if numero_secreto==0 %}
-<form action="/tentar-advinhar-numero" method="POST" class="container">
-    <label for="tentativa">Faça a sua tentativa e descubra o número secreto:</label>
-    <input type="number" id="tentativa" name="tentativa" value="{{tentativa}}" placeholder="Insira um número inteiro" required>
-    <input type="hidden" id="id_jogado_atual" name="id_jogado_atual" value="{{id_jogador_atual}}">
-    <h5>{{resultado}}</h5>
-    <div class="btn-container">
-        <button type="submit">Descobrir</button>
-        <button type="button" class="btn btn-restart" onclick="voltarAoInicio()">Sair</button>
+        {% else %}
+            <div class="container mt-5">
+                <div class="jumbotron text-center">
+                    <h1 class="display-4">Bem-vindo ao Jogo de Adivinhação!</h1>
+                    <p class="lead">Teste e veja se consegue descobrir o número secreto.</p>
+                    <p>Clique no botão abaixo para começar a jogar.</p>
+                    <a class="btn btn-primary btn-lg" href="{{ url_for('jogo_advinhacao') }}" role="button">Começar a Jogar</a>
+                </div>
+            </div>
+        {% endif %}
 
-    </div>
-</form>
+        <!-- Seu código existente ... -->
+        <script>
+            function voltarAoInicio() {
+                // Obtenha o valor da entrada id_jogado_atual
+                var id_jogador_atual = document.getElementById('id_jogado_atual').value;
 
-{% else %}
-    <div class="container mt-5">
-        <div class="jumbotron text-center">
-            <h1 class="display-4">Bem-vindo ao Jogo de Adivinhação!</h1>
-            <p class="lead">Teste e veja se consegue descobrir o número secreto.</p>
-            <p>Clique no botão abaixo para começar a jogar.</p>
-            <a class="btn btn-primary btn-lg" href="{{ url_for('jogo_advinhacao') }}" role="button">Começar a Jogar</a>
-        </div>
-    </div>
-{% endif %}
+                // Construa a URL correta incluindo o parâmetro id_jogado_atual
+                var url = '{{ url_for("voltar_menu_jogo") }}?id_jogado_atual=' + id_jogador_atual;
 
-<!-- Seu código existente ... -->
-<script>
-    function voltarAoInicio() {
-        // Obtenha o valor da entrada id_jogado_atual
-        var id_jogador_atual = document.getElementById('id_jogado_atual').value;
+                // Redirecione para a URL construída
+                window.location.href = url;
+            }
+        </script>
+        <!-- Seu código existente ... -->
 
-        // Construa a URL correta incluindo o parâmetro id_jogado_atual
-        var url = '{{ url_for("voltar_menu_jogo") }}?id_jogado_atual=' + id_jogador_atual;
-
-        // Redirecione para a URL construída
-        window.location.href = url;
-    }
-</script>
-
-<!-- Seu código existente ... -->
-
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-</body>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
 </html>
