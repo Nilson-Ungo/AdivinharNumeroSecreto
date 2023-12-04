@@ -109,9 +109,9 @@ def verificar_tentativa(numero_secreto, id_jogador_atual, tentativas):
             return f'Parabéns, acertou!\nO número secreto é o {numero_secreto}'
 
 
-# Rota para reiniciar o jogo
+# Rota para voltar ao menu inicial do jogo
 @app.route('/jogo-reiniciar')
-def reiniciar_jogo():
+def voltar_menu_jogo():
     # Verifica se há o parâmetro id_jogado_atual na URL
     id_jogador_atual = request.args.get('id_jogado_atual')
 
@@ -122,7 +122,7 @@ def reiniciar_jogo():
         session.commit()
         session.close()
 
-    # Redireciona para a página inicial
+    # Redireciona para a página inicial do jogo
     return redirect(url_for('inicio'))
 
 

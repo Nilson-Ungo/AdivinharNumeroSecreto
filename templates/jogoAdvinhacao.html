@@ -115,7 +115,7 @@
         var id_jogador_atual = document.getElementById('id_jogado_atual').value;
 
         // Construa a URL correta incluindo o parâmetro id_jogado_atual
-        var url = '{{ url_for("reiniciar_jogo") }}?id_jogado_atual=' + id_jogador_atual;
+        var url = '{{ url_for("voltar_menu_jogo") }}?id_jogado_atual=' + id_jogador_atual;
 
         // Redirecione para a URL construída
         window.location.href = url;
