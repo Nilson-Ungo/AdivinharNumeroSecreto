@@ -57,8 +57,9 @@ def jogo_advinhacao():
         session.add(nova_tentativa)
         session.commit()
         session.close()
+        resultado = []
 
-    return render_template('jogoAdvinhacao.html', numero_secreto=0, id_jogador_atual=jogador_atual)
+    return render_template('jogoAdvinhacao.html', numero_secreto=0, id_jogador_atual=jogador_atual, resultado=resultado)
 
 '''# Define uma rota para a URL '/tentar-advinhar-numero', que aceita tanto requisições GET quanto POST'''
 @app.route('/tentar-advinhar-numero', methods=["GET", 'POST'])
@@ -106,18 +107,18 @@ def verificar_tentativa(numero_secreto, id_jogador_atual, tentativas, numero_de_
                     Tentar_advinhar_numero.jogador == int(id_jogador_atual)).delete()
                 session.commit()
                 session.close()
-                return f'Parabéns! Adivinhou corretamente! O número secreto é 18 e conseguiu acertar à {numero_de_tentativas}ª tentativa. Excelente trabalho!'
+                return [f'Parabéns! Adivinhou corretamente! O número secreto é {numero_secreto} e conseguiu acertar à {numero_de_tentativas}ª tentativa. Excelente trabalho!']
 
             else:
                 resultado = comparar_numero(tentativas, id_jogador_atual, numero_secreto)
-                return resultado
+                return [resultado, 'erro']
         else:
             '''Dar parabéns ao jogador caso acerte na primeira tentativa'''
             print('=' * 30)
             print(f'Parabéns, acertou!\nO número secreto é {numero_secreto}')
             print('Acertou na primeira tentativa')
             print('=' * 30)
-            return f'Parabéns! Adivinhou corretamente! O número secreto é 18 e conseguiu acertar à {numero_de_tentativas}ª tentativa. Excelente trabalho!'
+            return [f'Parabéns! Adivinhou corretamente! O número secreto é {numero_secreto} e conseguiu acertar à {numero_de_tentativas}ª tentativa. Excelente trabalho!']
 
 
 # Rota para voltar ao menu inicial do jogo

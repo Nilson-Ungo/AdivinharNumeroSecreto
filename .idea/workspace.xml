@@ -4,6 +4,8 @@
     <list default="true" id="8e544b69-d4b4-4e0c-8f01-c841d0d1f3ee" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/advinhar_numero.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/advinhar_numero.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/jogoAdvinhacao.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/jogoAdvinhacao.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

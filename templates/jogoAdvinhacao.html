@@ -83,6 +83,20 @@
                 .btn-restart:hover {
                     background-color: #c82333; /* Cor vermelha mais escura ao passar o mouse */
                 }
+
+                .fail-message {
+                    margin-top: 20px;
+                    padding: 10px;
+                    border-radius: 5px;
+                    color: #dc3545; /* Cor vermelha para falha */
+                }
+
+                .success-message {
+                    margin-top: 20px;
+                    padding: 10px;
+                    border-radius: 5px;
+                    color: #038a42; /* Cor verde para sucesso */
+                }
             </style>
     </head>
     <body>
@@ -91,7 +105,13 @@
             <label for="tentativa" style="font-weight: bold; color: black;">Faça a sua tentativa (entre 1 e 20) e descubra o número secreto:</label>
             <input type="number" id="tentativa" name="tentativa" value="{{tentativa}}" placeholder="Insira um número inteiro" required>
             <input type="hidden" id="id_jogado_atual" name="id_jogado_atual" value="{{id_jogador_atual}}">
-            <h5>{{resultado}}</h5>
+            <!-- Adicione esta parte no seu HTML -->
+            <!-- Adicione esta parte no seu HTML -->
+            {% if resultado|length == 2 %}
+                <h5 class="fail-message">{{ resultado[0] }}</h5>
+            {% elif resultado|length == 1 %}
+                <h5 class="success-message">{{ resultado[0] }}</h5>
+            {% endif %}
             <div class="btn-container">
                 <button type="submit">Descobrir</button>
                 <button type="button" class="btn btn-restart" onclick="voltarAoInicio()">Sair</button>
