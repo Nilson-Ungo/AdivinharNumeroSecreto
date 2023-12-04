@@ -88,7 +88,7 @@
     <body>
         {% if numero_secreto==0 %}
         <form action="/tentar-advinhar-numero" method="POST" class="container">
-            <label for="tentativa" style="font-weight: bold; color:black;">Faça a sua tentativa e descubra o número secreto:</label>
+            <label for="tentativa" style="font-weight: bold; color: black;">Faça a sua tentativa (entre 1 e 20) e descubra o número secreto:</label>
             <input type="number" id="tentativa" name="tentativa" value="{{tentativa}}" placeholder="Insira um número inteiro" required>
             <input type="hidden" id="id_jogado_atual" name="id_jogado_atual" value="{{id_jogador_atual}}">
             <h5>{{resultado}}</h5>
@@ -102,7 +102,7 @@
         {% else %}
             <div class="container mt-5">
                 <div class="jumbotron text-center">
-                    <h3 class="display-4">Bem-vindo ao Jogo de Adivinhação!</h3>
+                    <h3 class="display-5">Bem-vindo ao Jogo de Adivinhação!</h3>
                     <p class="lead">Teste e veja se consegue descobrir o número secreto.</p>
                     <p>Clique no botão abaixo para começar a jogar.</p>
                     <a class="btn btn-primary btn-lg" href="{{ url_for('jogo_advinhacao') }}" role="button">Começar a Jogar</a>
