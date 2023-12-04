@@ -12,15 +12,18 @@
                 justify-content: center;
                 height: 100vh;
                 margin: 0;
-                background-color: #f8f9fa; /* Cor de fundo geral */
+                background-color: #dbe5e5; /* Cor de fundo geral */
             }
 
             .container {
                 text-align: center;
-                background-color: #ffffff; /* Cor de fundo do container */
+                background-color: #D9AFD9;
+                background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
                 padding: 20px;
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+                max-width: 400px; /* Largura máxima do container */
+                width: 90%; /* Largura do container em relação à tela */
             }
 
             form {
@@ -35,7 +38,8 @@
             }
 
             input {
-                width: 20%; /* Reduzi a largura para 60% do container */
+                width: 100%; /* Largura total do container */
+                box-sizing: border-box; /* Evita que as bordas adicionem à largura */
                 padding: 10px;
                 border: 1px solid #ccc;
                 border-radius: 5px;
@@ -57,14 +61,14 @@
                 margin-right: 10px;
                 padding: 10px 20px;
                 border-radius: 20px;
-                background-color: #007bff; /* Cor azul */
+                background-color: #4caf50; /* Cor verde */
                 color: #fff; /* Cor do texto branco */
                 border: none;
                 cursor: pointer;
             }
 
             button:hover {
-                background-color: #0056b3; /* Cor azul mais escura ao passar o mouse */
+                background-color: #45a049; /* Cor verde mais escura ao passar o mouse */
             }
 
             .btn-restart {
@@ -84,7 +88,7 @@
     <body>
         {% if numero_secreto==0 %}
         <form action="/tentar-advinhar-numero" method="POST" class="container">
-            <label for="tentativa">Faça a sua tentativa e descubra o número secreto:</label>
+            <label for="tentativa" style="font-weight: bold; color:black;">Faça a sua tentativa e descubra o número secreto:</label>
             <input type="number" id="tentativa" name="tentativa" value="{{tentativa}}" placeholder="Insira um número inteiro" required>
             <input type="hidden" id="id_jogado_atual" name="id_jogado_atual" value="{{id_jogador_atual}}">
             <h5>{{resultado}}</h5>
