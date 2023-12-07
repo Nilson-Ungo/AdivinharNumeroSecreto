@@ -16,7 +16,6 @@ Você também pode [testar o projeto online aqui](https://guesssecretnumber.onre
 
 - **Python (com biblioteca random):** Lógica do jogo e geração do número secreto.
 - **HTML:** Estrutura básica da interface do jogo.
-- **Bootstrap:** Aprimoramento visual e responsividade.
 - **CSS:** Estilização para uma experiência agradável.
 
 ## Próximos Passos
