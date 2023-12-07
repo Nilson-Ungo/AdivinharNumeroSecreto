@@ -14,7 +14,7 @@ Você também pode [testar o projeto online aqui](https://guesssecretnumber.onre
 
 ## Tecnologias Utilizadas
 
-- **Python (com biblioteca random):** Lógica do jogo e geração do número secreto.
+- **Python (com biblioteca random e SQLite3):** Lógica do jogo, geração do número secreto e armazenamento de dados.
 - **HTML:** Estrutura básica da interface do jogo.
 - **CSS:** Estilização para uma experiência agradável.
 
